@@ -3089,7 +3089,7 @@ class SAPIntegration:
                             'item_name': item.get('itemName', item_metadata.get('item_name', f'Item {item_code}')),
                             'warehouse_code': item.get('WhsCode', warehouse_code),
                             'quantity_on_hand': float(item.get('OnHand', 0.0)),
-                            'unit_of_measure': item_metadata.get('unit_of_measure', 'EA'),
+                            'unit_of_measure': item_metadata.get('unit_of_measure', ''),
                             'is_serial_managed': item_metadata.get('is_serial_managed', False),
                             'is_batch_managed': item_metadata.get('is_batch_managed', False),
                             'manage_serial_numbers': item_metadata.get('manage_serial_numbers', 'N'),
@@ -3176,7 +3176,7 @@ class SAPIntegration:
                     
                     return {
                         'item_name': item.get('ItemName', f'Item {item_code}'),
-                        'unit_of_measure': item.get('InventoryUOM', 'EA'),
+                        'unit_of_measure': item.get('InventoryUOM', ''),
                         'is_serial_managed': manage_serial == 'Y',
                         'is_batch_managed': manage_batch == 'Y',
                         'manage_serial_numbers': manage_serial,
@@ -3194,14 +3194,7 @@ class SAPIntegration:
     def _get_default_item_metadata(self):
         """Get default item metadata when SAP API is unavailable"""
         return {
-            'item_name': 'Unknown Item',
-            'unit_of_measure': 'EA',
-            'is_serial_managed': False,
-            'is_batch_managed': False,
-            'manage_serial_numbers': 'N',
-            'manage_batch_numbers': 'N',
-            'item_type': 'itItems',
-            'standard_price': 0.0
+
         }
 
     def get_items_by_warehouse(self, warehouse_code):

@@ -266,7 +266,7 @@ def add_non_serial_item(transfer_id):
         item_code = request.form.get('item_code', '').strip()
         item_description = request.form.get('item_description', '').strip()
         quantity = request.form.get('quantity', '0').strip()
-        unit_of_measure = request.form.get('unit_of_measure', 'EA').strip()
+        unit_of_measure = request.form.get('unit_of_measure', '').strip()
 
         if not all([item_code, item_description, quantity]):
             return jsonify({'success': False, 'error': 'Item code, description, and quantity are required'}), 400
